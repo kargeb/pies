@@ -1,0 +1,44 @@
+/* Modern Reset */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Bardzo ważne: padding nie zwiększa szerokości elementu */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  font-family: sans-serif; /* Podstawowy font, żeby nie było Times New Roman */
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+ul,
+ol {
+  list-style: none; /* Wyłącza kropki w listach, co jest przydatne w nawigacji */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
