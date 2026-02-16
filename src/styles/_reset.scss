@@ -11,11 +11,9 @@
   font: inherit;
 }
 
-body {
-  min-height: 100vh;
-  line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  font-family: sans-serif; /* Podstawowy font, żeby nie było Times New Roman */
+body,
+html {
+  height: 100%;
 }
 
 img,
@@ -35,7 +33,7 @@ button {
 
 ul,
 ol {
-  list-style: none; /* Wyłącza kropki w listach, co jest przydatne w nawigacji */
+  list-style: none;
 }
 
 a {

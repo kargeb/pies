@@ -1,0 +1,27 @@
+@use "../styles/variables";
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+}
+
+.wrapper {
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  display: flex;
+  height: calc(100% - variables.$topbarHeight);
+}
+
+.sidebar {
+  width: 200px;
+  height: 100%;
+}
+
+.main {
+  flex: 1;
+  border-right: 2px solid pink;
+}

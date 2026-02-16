@@ -1,0 +1,10 @@
+@use "../../../../styles/variables";
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: aqua;
+  height: variables.$topbarHeight;
+}

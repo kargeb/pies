@@ -1,23 +1,11 @@
-<header>
-  <h1>PIES</h1>
-  <h2>Angular live coding review</h2>
-</header>
+<div class="wrapper">
+  <app-topbar class="topbar" />
 
-<div>
-  <nav>
-    <ul>
-      <li>
-        <a routerLink="/home">Home</a>
-      </li>
-      <li>
-        <a routerLink="/users">Users</a>
-      </li>
-      <li>
-        <a routerLink="/todo">Todo</a>
-      </li>
-    </ul>
-  </nav>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+  <div class="content">
+    <app-sidebar class="sidebar" />
+
+    <main class="main">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

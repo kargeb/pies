@@ -1,0 +1,23 @@
+@use "../../../styles/variables";
+
+.wrapper {
+  background-color: cadetblue;
+  height: 100%;
+  //   height: calc(100% - variables.$topbarHeight);
+}
+
+li a {
+  background-color: beige;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+
+  &:hover {
+    background-color: burlywood;
+  }
+
+  &.active {
+    background-color: brown;
+  }
+}
