@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-users',
-  imports: [],
   templateUrl: './users.html',
   styleUrl: './users.scss',
+  imports: [RouterOutlet],
 })
-export class Users {
-
-}
+export class Users {}

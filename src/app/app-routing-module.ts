@@ -10,7 +10,11 @@ const routes: Routes = [
     component: Home,
   },
   // { path: 'home', component: undefined },
-  { path: 'users', component: Users },
+  {
+    path: 'users',
+    loadChildren: () =>
+      import('./features/users/users-module').then((m) => m.UsersModule),
+  },
   { path: 'todo', component: Todo },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   // { path: '**', component: undefined },
