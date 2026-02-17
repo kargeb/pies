@@ -11,7 +11,8 @@ const routes: Routes = [
     component: Users,
     children: [
       { path: 'all-users', component: AllUsers },
-      { path: 'user-details', component: UserDetails },
+      // { path: 'user-details', component: UserDetails },
+      { path: 'user-details/:id', component: UserDetails },
       { path: 'add-user', component: AddUser },
       { path: '', redirectTo: 'all-users', pathMatch: 'full' },
     ],
