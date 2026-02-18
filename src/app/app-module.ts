@@ -5,13 +5,21 @@ import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Topbar } from './core/layout/topbar/topbar';
 import { Sidebar } from './core/layout/sidebar/sidebar';
+import {
+  HttpClientModule,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 const coreComponents = [Topbar, Sidebar];
 
 @NgModule({
   declarations: [App],
   imports: [BrowserModule, AppRoutingModule, coreComponents],
-  providers: [provideBrowserGlobalErrorListeners()],
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
   bootstrap: [App],
 })
 export class AppModule {}
