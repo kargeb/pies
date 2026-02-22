@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Users } from './users';
-import { AllUsers } from './components/all-users/all-users';
-import { UserDetails } from './components/user-details/user-details';
-import { AddUser } from './components/add-user/add-user';
+import { AddUser, AllUsers, UserDetails } from './containers';
+// import { AllUsers } from './containers/all-users/all-users';
+// import { UserDetails } from './containers/user-details/user-details';
+// import { AddUser } from './containers/add-user/add-user';
 
 const routes: Routes = [
   {

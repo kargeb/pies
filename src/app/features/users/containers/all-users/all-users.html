@@ -1,0 +1,25 @@
+<button (click)="getAllUsers()">Refresh</button>
+
+<div class="users">
+  <div class="list left">
+    <ng-container *ngFor="let user of allUsers(); let i = index">
+      <app-single-user [name]="user?.username || ''" />
+    </ng-container>
+  </div>
+  <div class="list right">
+    @for (user of allUsers(); track user.id; let dupa = $first) {
+      @if (dupa) {
+        {{ $count }}
+      }
+      <app-single-user [name]="user?.username || ''" />
+    } @empty {
+      PUŚCIOŚĆ
+    }
+  </div>
+</div>
+
+<!-- <pre>
+
+    {{ allUsers() | json }}
+</pre>
+<app-loader /> -->

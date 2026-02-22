@@ -8,10 +8,12 @@ import {
 } from '@angular/core';
 import { User } from '../../../../core/models/users.model';
 import { UsersService } from '../../../../core/services/users.service';
+import { Loader } from '../../../../core/components';
+import { SingleUser } from '../../components/single-user/single-user';
 
 @Component({
   selector: 'app-all-users',
-  imports: [CommonModule],
+  imports: [CommonModule, Loader, SingleUser],
   templateUrl: './all-users.html',
   styleUrl: './all-users.scss',
 })
