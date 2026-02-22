@@ -1,4 +1,9 @@
-<p>user-details works!</p>
+<!-- <p>user-details works!</p>
 
 <p>USER ID: {{ userId }}</p>
-<p>USER ID2: {{ userId2() }}</p>
+<p>USER ID2: {{ userId2() }}</p> -->
+@if (userDetails()) {
+  {{ userDetails() | json }}
+} @else {
+  ..waiting
+}

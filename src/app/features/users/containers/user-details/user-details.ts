@@ -11,10 +11,12 @@ import {
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, Observable, of, Subscription, switchMap, take, tap } from 'rxjs';
+import { UsersService } from '../../../../core/services/users.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-details',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './user-details.html',
   styleUrl: './user-details.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -22,9 +24,12 @@ import { map, Observable, of, Subscription, switchMap, take, tap } from 'rxjs';
 export class UserDetails {
   private readonly activatedRoute = inject(ActivatedRoute);
   private readonly cdr = inject(ChangeDetectorRef);
+  private usersService = inject(UsersService);
   private subscription: Subscription = new Subscription();
 
-  public userId?: number | string;
+  public userId?: string | null;
+
+  public userDetails = signal({});
 
   private paramsSignal = toSignal(this.activatedRoute.paramMap);
 
@@ -34,7 +39,7 @@ export class UserDetails {
 
   public constructor() {
     effect(() => {
-      this.userId = Number(this.paramsSignal()?.get('id'));
+      this.userId = this.paramsSignal()?.get('id');
     });
   }
 
@@ -57,6 +62,20 @@ export class UserDetails {
             // const valueFromObservable = toSignal(userIdObserv);
 
             console.log('signal value from obserab+le: ', userIdObserv);
+
+            if (!userIdObserv) {
+              throw Error('NO ID in the component');
+            }
+
+            this.usersService.getUserDetails(userIdObserv).subscribe({
+              next: (user) => {
+                this.userDetails.set(user);
+              },
+              error: (err) => {
+                console.log('err: ', err);
+              },
+            });
+
             // console.log(
             //   'userIdObserv: ',
             //   userIdObserv
@@ -75,14 +94,14 @@ export class UserDetails {
     );
   }
 
-  private getIdBySubscribe() {
-    this.activatedRoute.paramMap
-      .pipe(takeUntilDestroyed())
-      .subscribe((params) => {
-        this.userId = Number(params.get('id'));
-        console.log('userId: ', this.userId);
-      });
-  }
+  // private getIdBySubscribe() {
+  //   this.activatedRoute.paramMap
+  //     .pipe(takeUntilDestroyed())
+  //     .subscribe((params) => {
+  //       this.userId = Number(params.get('id'));
+  //       console.log('userId: ', this.userId);
+  //     });
+  // }
 
   public ngOnDestroy() {
     this.subscription?.unsubscribe();

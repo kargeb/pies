@@ -1,25 +1,67 @@
-<button (click)="getAllUsers()">Refresh</button>
+<button (click)="getAllUsers()">Refresh</button> <br />
+
+number of users: {{ totalUsers() }}
 
 <div class="users">
   <div class="list left">
-    <ng-container *ngFor="let user of allUsers(); let i = index">
-      <app-single-user [name]="user?.username || ''" />
-    </ng-container>
+    @if (!isLoading()) {
+      <ng-container *ngFor="let user of allUsers(); let i = index">
+        <app-single-user
+          [user]="user"
+          (onUserClick)="switchToUserDetails($event)"
+        />
+      </ng-container>
+    } @else {
+      <div class="loader">
+        <ng-container *ngTemplateOutlet="loader" />
+      </div>
+    }
   </div>
   <div class="list right">
-    @for (user of allUsers(); track user.id; let dupa = $first) {
-      @if (dupa) {
-        {{ $count }}
+    @if (!isLoading()) {
+      @for (user of allUsers(); track user.id; let dupa = $first) {
+        @if (dupa) {
+          {{ $count }}
+        }
+        @if ($last) {
+          myszszsz
+        }
+        <app-single-user [user]="user" />
+      } @empty {
+        PUŚCIOŚĆ
       }
-      <app-single-user [name]="user?.username || ''" />
-    } @empty {
-      PUŚCIOŚĆ
+    } @else {
+      <div class="loader">
+        <ng-container *ngTemplateOutlet="loader" />
+      </div>
     }
   </div>
 </div>
+
+<ng-template #loader>
+  <app-loader />
+</ng-template>
+
+<ng-template #loaderParams let-param1="param1" let-second="param2">
+  <app-loader />
+  param1 {{ param1 }}, param2 {{ second }}
+</ng-template>
 
 <!-- <pre>
 
     {{ allUsers() | json }}
 </pre>
 <app-loader /> -->
+
+<!-- <ng-container *ngTemplateOutlet="loader" />
+<ng-container *ngTemplateOutlet="loaderParams; context: { param1, param2 }" />
+
+{{ isLoading() }}
+@if (isLoading()) {
+  LADUJE SIE
+} @else {
+  ZALADOWANE
+}
+
+<div *ngIf="isLoading()">LADUJE SIE 22</div>
+<div *ngIf="!isLoading()">ZALADOWANE 2222</div> -->

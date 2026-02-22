@@ -14,4 +14,12 @@ export class UsersService {
   public getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.apiUrl);
   }
+
+  public getUserDetails(id: string): Observable<User> {
+    if (!id) {
+      throw new Error('no id!');
+    }
+
+    return this.http.get<User>(`${this.apiUrl}/${id}`);
+  }
 }

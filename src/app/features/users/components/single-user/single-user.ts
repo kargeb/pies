@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
+import { User } from '../../../../core/models/users.model';
 
 @Component({
   selector: 'app-single-user',
@@ -8,5 +15,10 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SingleUser {
-  @Input() name: string = '';
+  @Input() user?: User;
+  @Output() onUserClick = new EventEmitter<string>();
+
+  public showDetail(id: string): void {
+    this.onUserClick.emit(id);
+  }
 }

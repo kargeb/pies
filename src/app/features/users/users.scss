@@ -44,3 +44,7 @@
   background-color: darkcyan !important;
   color: white;
 }
+
+.disabled-link {
+  pointer-events: none;
+}

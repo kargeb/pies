@@ -1,0 +1,15 @@
+:host {
+  .username {
+    margin-right: 20px;
+  }
+
+  .button {
+    visibility: hidden;
+  }
+
+  &:hover {
+    .button {
+      visibility: visible !important;
+    }
+  }
+}
