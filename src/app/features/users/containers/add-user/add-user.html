@@ -1,1 +1,57 @@
 <p>add-user works!</p>
+
+<div class="form-wrapper">form</div>
+
+<button (click)="showForm()">show form</button>
+<br />
+<button (click)="resetForm()">reset form</button>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div class="form-field">
+    <label for="username">Username:</label>
+    <div class="input-wrapper">
+      <input
+        id="username"
+        type="text"
+        formControlName="username"
+        [class.error]="username.touched && username.invalid"
+      />
+
+      @if (username.touched && username.invalid) {
+        <div class="error-msg">
+          @if (username.hasError("required")) {
+            <small>Required</small>
+          }
+          @if (username.hasError("maxlength")) {
+            <small>Max length is {{ usernameMaxLength }}</small>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="city">City:</label>
+    <div>
+      <input
+        id="city"
+        type="text"
+        formControlName="city"
+        [class.error]="city.touched && city.invalid"
+      />
+    </div>
+  </div>
+  <div class="form-field">
+    <label for="age">Age:</label>
+    <div>
+      <input
+        id="age"
+        type="number"
+        formControlName="age"
+        [class.error]="age.touched && age.invalid"
+      />
+    </div>
+  </div>
+  <br />
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

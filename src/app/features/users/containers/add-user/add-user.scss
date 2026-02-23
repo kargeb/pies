@@ -1,0 +1,26 @@
+.form-wrapper {
+  padding: 16px;
+  background-color: rgb(195, 195, 255);
+}
+
+.form-field {
+  margin-bottom: 22px;
+  display: flex;
+  gap: 14px;
+}
+
+.error {
+  border-color: red;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.error-msg {
+  position: absolute;
+  top: 24px;
+  left: 0px;
+  font-size: 14px;
+  color: red;
+}
