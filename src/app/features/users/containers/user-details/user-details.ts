@@ -13,6 +13,8 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { map, Observable, of, Subscription, switchMap, take, tap } from 'rxjs';
 import { UsersService } from '../../../../core/services/users.service';
 import { CommonModule } from '@angular/common';
+import { Users } from '../../users';
+import { User } from '../../../../core/models/users.model';
 
 @Component({
   selector: 'app-user-details',
@@ -29,9 +31,17 @@ export class UserDetails {
 
   public userId?: string | null;
 
-  public userDetails = signal({});
+  public userDetails = signal<User | undefined>(undefined);
 
   private paramsSignal = toSignal(this.activatedRoute.paramMap);
+
+  public userProperties: (keyof User)[] = [
+    'username',
+    'age',
+    'city',
+    'phone',
+    'assets',
+  ];
 
   // private observableParams?: Observable<ParamMap> = this.activatedRoute.paramMap;
 

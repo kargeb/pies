@@ -3,7 +3,29 @@
 <p>USER ID: {{ userId }}</p>
 <p>USER ID2: {{ userId2() }}</p> -->
 @if (userDetails()) {
+  @for (property of userProperties; track $index) {
+    <div>{{ property | titlecase }}</div>
+    <div>{{ userDetails()![property] }}</div>
+    <br />
+  }
+  <!-- <ng-container
+    *ngTemplateOutlet="
+      userTemplate;
+      context: { label: 'Age', value: userDetails()?.age }
+    "
+  /> -->
   {{ userDetails() | json }}
 } @else {
   ..waiting
 }
+
+<ng-template #userTemplate let-label="label" let-value="value">
+  <div>
+    <div>
+      {{ label }}
+    </div>
+    <div>
+      {{ value }}
+    </div>
+  </div>
+</ng-template>
