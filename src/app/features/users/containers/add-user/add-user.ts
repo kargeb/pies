@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -26,8 +27,21 @@ export class AddUser {
     ],
     age: [0, [Validators.required, Validators.max(200)]],
     city: ['', [Validators.required]],
-    // assets: this.[],
+    assets: this.fb.array([]),
   });
+
+  public get assets(): FormArray {
+    return this.form.controls.assets;
+  }
+
+  public addAssets(): void {
+    const assetControl = this.fb.control('', Validators.required);
+    this.assets.push(assetControl);
+  }
+
+  public removeAsset(index: number) {
+    this.assets.removeAt(index);
+  }
 
   //   ngOnInit() {
   //  this.form = this.fb.group({

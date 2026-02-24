@@ -52,6 +52,25 @@
       />
     </div>
   </div>
+
+  <!-- Assets -->
+
+  <div class="form-field">
+    <label>Assets</label>
+    <button type="button" (click)="addAssets()">+ Add asset</button>
+    <br />
+    <div formArrayName="assets">
+      @for (control of assets.controls; track $index) {
+        <div>
+          <input type="text" [formControlName]="$index" />
+          <button type="button" (click)="removeAsset($index)">
+            - Remove asset
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+
   <br />
   <button type="submit" [disabled]="form.invalid">Submit</button>
 </form>
