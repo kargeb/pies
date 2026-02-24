@@ -1,3 +1,8 @@
+@if (loaderService.isLoading()) {
+  <div class="global-loader-overlay">
+    <app-loader></app-loader>
+  </div>
+}
 <div class="wrapper">
   <app-topbar class="topbar" />
 

@@ -10,12 +10,13 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { Loader } from './core/components';
 
 const coreComponents = [Topbar, Sidebar];
 
 @NgModule({
   declarations: [App],
-  imports: [BrowserModule, AppRoutingModule, coreComponents],
+  imports: [BrowserModule, AppRoutingModule, coreComponents, Loader],
   providers: [
     provideBrowserGlobalErrorListeners(),
     provideHttpClient(withInterceptorsFromDi()),
