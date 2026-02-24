@@ -1,5 +1,3 @@
-<h3 class="title">users works!</h3>
-
 <nav class="nav">
   <ul>
     <li>
@@ -22,4 +20,8 @@
     </li>
   </ul>
 </nav>
-<router-outlet></router-outlet>
+@if (loading()) {
+  <app-loader />
+} @else {
+  <router-outlet></router-outlet>
+}

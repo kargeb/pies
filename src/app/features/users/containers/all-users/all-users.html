@@ -1,4 +1,4 @@
-<button (click)="getAllUsers()">Refresh</button> <br />
+<button (click)="refresh()">Refresh</button> <br />
 
 number of users: {{ totalUsers() }}
 
@@ -18,23 +18,26 @@ number of users: {{ totalUsers() }}
     }
   </div>
   <div class="list right">
-    @if (!isLoading()) {
-      @for (user of allUsers(); track user.id; let dupa = $first) {
-        @if (dupa) {
-          {{ $count }}
-        }
-        @if ($last) {
-          myszszsz
-        }
-        <app-single-user [user]="user" />
-      } @empty {
-        PUŚCIOŚĆ
+    <!-- @if (!isLoading()) { -->
+    @for (user of allUsers(); track user.id; let dupa = $first) {
+      @if (dupa) {
+        {{ $count }}
       }
-    } @else {
+      @if ($last) {
+        myszszsz
+      }
+      <app-single-user
+        [user]="user"
+        (onUserClick)="switchToUserDetails($event)"
+      />
+    } @empty {
+      PUŚCIOŚĆ
+    }
+    <!-- } @else {
       <div class="loader">
         <ng-container *ngTemplateOutlet="loader" />
       </div>
-    }
+    } -->
   </div>
 </div>
 
