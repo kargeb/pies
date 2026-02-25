@@ -2,8 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Home } from './features/home/home';
 import { Todo } from './features/todo/todo';
+import { Auth } from './features/auth/auth';
 
 const routes: Routes = [
+  {
+    path: 'login',
+    component: Auth,
+  },
   {
     path: 'home',
     component: Home,
