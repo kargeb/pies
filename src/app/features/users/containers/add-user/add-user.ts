@@ -7,6 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { CanDeactivateComponent } from '../../../../core/guards';
 
 @Component({
   selector: 'app-add-user',
@@ -14,10 +15,18 @@ import {
   templateUrl: './add-user.html',
   styleUrl: './add-user.scss',
 })
-export class AddUser {
+export class AddUser implements CanDeactivateComponent {
   private readonly fb = inject(FormBuilder);
 
   public usernameMaxLength = 10;
+
+  public canDeactivate(): boolean {
+    if (this.form.dirty) {
+      return confirm('MASZ ZMIANY W FORMULARZU, NAPEWNO CHCESZ WYJSC ?');
+    }
+
+    return true;
+  }
 
   // public form = this.fb.nonNullable.group({
   public form = this.fb.group({

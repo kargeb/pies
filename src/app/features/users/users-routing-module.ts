@@ -4,6 +4,7 @@ import { Users } from './users';
 import { AddUser, AllUsers, UserDetails } from './containers';
 import { AllUsersResolver } from './resolvers';
 import { CurrentUser } from './containers/current-user/current-user';
+import { deactivateGuard } from '../../core/guards';
 // import { AllUsers } from './containers/all-users/all-users';
 // import { UserDetails } from './containers/user-details/user-details';
 // import { AddUser } from './containers/add-user/add-user';
@@ -26,7 +27,11 @@ const routes: Routes = [
       },
       // { path: 'user-details', component: UserDetails },
       { path: 'user-details/:id', component: UserDetails },
-      { path: 'add-user', component: AddUser },
+      {
+        path: 'add-user',
+        component: AddUser,
+        canDeactivate: [deactivateGuard],
+      },
       { path: '', redirectTo: 'all-users', pathMatch: 'full' },
     ],
   },
