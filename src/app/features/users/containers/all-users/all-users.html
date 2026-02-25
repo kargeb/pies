@@ -9,6 +9,7 @@ number of users: {{ totalUsers() }}
         <app-single-user
           [user]="user"
           (onUserClick)="switchToUserDetails($event)"
+          (onDeleteClick)="deleteUser($event)"
         />
       </ng-container>
     } @else {

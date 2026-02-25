@@ -1,1 +1,19 @@
 <p>todo works!</p>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-field">
+    <div>label</div>
+    <input formControlName="task" />
+  </div>
+  <div class="form-field">
+    <div>Priority</div>
+    <select formControlName="priority">
+      @for (item of priorityValues; track $index) {
+        <option [value]="item">{{ item }}</option>
+      }
+    </select>
+    <!-- <input formControlName="priority" /> -->
+  </div>
+
+  <button type="submit">Submit</button>
+</form>

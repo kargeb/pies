@@ -8,6 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { CanDeactivateComponent } from '../../../../core/guards';
+import { Asset, User } from '../../../../core/models/users.model';
+import { UsersService, UsersStateService } from '../../../../core/services';
 
 @Component({
   selector: 'app-add-user',
@@ -17,6 +19,8 @@ import { CanDeactivateComponent } from '../../../../core/guards';
 })
 export class AddUser implements CanDeactivateComponent {
   private readonly fb = inject(FormBuilder);
+  private readonly usersService = inject(UsersService);
+  private readonly usersStateService = inject(UsersStateService);
 
   public usernameMaxLength = 10;
 
@@ -37,16 +41,26 @@ export class AddUser implements CanDeactivateComponent {
     age: [0, [Validators.required, Validators.max(200)]],
     city: ['', [Validators.required]],
     assets: this.fb.array([]),
+    phone: [null],
   });
 
   public get assets(): FormArray {
     return this.form.controls.assets;
   }
 
-  public addAssets(): void {
-    const assetControl = this.fb.control('', Validators.required);
+  public addAssets() {
+    const assetControl = this.fb.group({
+      assetName: ['', Validators.required],
+      quantity: [0, [Validators.required, Validators.min(0)]],
+    });
+
     this.assets.push(assetControl);
   }
+
+  // public addAssets(): void {
+  //   const assetControl = this.fb.control('', Validators.required);
+  //   this.assets.push(assetControl);
+  // }
 
   public removeAsset(index: number) {
     this.assets.removeAt(index);
@@ -81,6 +95,28 @@ export class AddUser implements CanDeactivateComponent {
 
   public submit() {
     console.log('form: ', this.form.value);
+
+    const userRequest: User = {
+      age: this.form.value.age || 0,
+      username: this.form.value.username || '',
+      assets: (this.form.value.assets as Asset[]) || [],
+      city: this.form.value.city || '',
+      id: crypto.randomUUID(),
+    };
+
+    console.log('userRequest: ', userRequest);
+
+    this.usersService.createUser(userRequest).subscribe({
+      next: (resp) => {
+        console.log('success resp', resp);
+
+        this.usersStateService.updateUsers(resp as User);
+        this.form.reset();
+      },
+      error: (err) => {
+        console.log('err: ', err);
+      },
+    });
   }
 
   public get username(): FormControl {

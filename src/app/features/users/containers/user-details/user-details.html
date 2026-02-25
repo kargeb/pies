@@ -4,9 +4,19 @@
 <p>USER ID2: {{ userId2() }}</p> -->
 @if (userDetails()) {
   @for (property of userProperties; track $index) {
-    <div>{{ property | titlecase }}</div>
-    <div>{{ userDetails()![property] }}</div>
-    <br />
+    @if (property !== "assets") {
+      <div>{{ property | titlecase }}</div>
+      <div>{{ userDetails()![property] }}</div>
+      <br />
+    }
+    @if (property === "assets") {
+      @for (asset of userDetails()![property]; track $index) {
+        <div>
+          <!-- {{ asset | json }} |  -->
+          {{ asset?.assetName }} => {{ asset.quantity }}
+        </div>
+      }
+    }
   }
   <!-- <ng-container
     *ngTemplateOutlet="

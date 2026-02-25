@@ -22,4 +22,12 @@ export class UsersService {
 
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
+
+  public createUser(user: User) {
+    return this.http.post(this.apiUrl, user);
+  }
+
+  public deleteUser(user: User) {
+    return this.http.delete(`${this.apiUrl}/${user.id}`);
+  }
 }

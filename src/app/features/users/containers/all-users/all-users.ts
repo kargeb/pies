@@ -14,6 +14,7 @@ import { Loader } from '../../../../core/components';
 import { SingleUser } from '../../components/single-user/single-user';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersStateService } from '../../../../core/services';
+import { map, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-all-users',
@@ -25,6 +26,8 @@ export class AllUsers {
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private usersStateService = inject(UsersStateService);
+  private usersService = inject(UsersService);
+
   // public allUsers: WritableSignal<User[]> = signal([]);
   public allUsers = this.usersStateService.users;
   public totalUsers = this.usersStateService.totalUsers;
@@ -80,5 +83,33 @@ export class AllUsers {
   public switchToUserDetails(id: string) {
     console.log('user id:', id);
     this.router.navigate(['/users/user-details', id]);
+  }
+
+  public deleteUser(user: User) {
+    // const id = user.id
+
+    console.log('USER TO DELETE:', user);
+    this.usersService
+      .deleteUser(user)
+      .pipe(
+        tap((resp) => {
+          console.log('tap resp', resp);
+        }),
+        switchMap(() => {
+          return of('czosz');
+          // return 'czosz'
+        }),
+        map((value) => {
+          console.log('value z switchMap: ', value);
+          const nowaValue = 'NOWA WALUEEEE';
+          return nowaValue;
+        }),
+      )
+      .subscribe({
+        next: (value) => {
+          console.log('value: ', value);
+          this.usersStateService.refreshUsers();
+        },
+      });
   }
 }

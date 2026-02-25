@@ -17,8 +17,13 @@ import { User } from '../../../../core/models/users.model';
 export class SingleUser {
   @Input() user?: User;
   @Output() onUserClick = new EventEmitter<string>();
+  @Output() onDeleteClick = new EventEmitter<User>();
 
   public showDetail(id: string): void {
     this.onUserClick.emit(id);
+  }
+
+  public deleteUser(user: User) {
+    this.onDeleteClick.emit(user);
   }
 }

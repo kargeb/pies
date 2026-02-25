@@ -1,5 +1,6 @@
 @if (user) {
   <span class="username">{{ user.username }}</span>
   <button class="button" (click)="showDetail(user.id)">Show details</button>
+  <button class="button" (click)="deleteUser(user)">delete User</button>
   <br />
 }

@@ -42,4 +42,10 @@ export class UsersStateService {
     this._users.set([]);
     this.loadUsers();
   }
+
+  public updateUsers(newUser: User) {
+    console.log('this.users BEFORE UPDATE', this.users());
+    this._users.set([...this.users(), newUser]);
+    console.log('this.users AFTER UPDATE', this.users());
+  }
 }

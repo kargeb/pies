@@ -61,11 +61,46 @@
     <br />
     <div formArrayName="assets">
       @for (control of assets.controls; track $index) {
-        <div>
-          <input type="text" [formControlName]="$index" />
+        <div [formGroupName]="$index">
+          <div class="form-field">
+            <label for="assetName">Asset Name:</label>
+            <div class="input-wrapper">
+              <input
+                id="assetName"
+                type="text"
+                formControlName="assetName"
+                [class.error]="
+                  control.get('assetName')?.touched &&
+                  control.get('assetName')?.invalid
+                "
+              />
+              @if (
+                control.get("assetName")?.touched &&
+                control.get("assetName")?.invalid
+              ) {
+                <div class="error-msg">
+                  @if (control.get("assetName")?.hasError("required")) {
+                    <small>Required</small>
+                  }
+                </div>
+              }
+              <!-- [class.error]="assetName.touched && assetName.invalid" -->
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="quantity">Quantity:</label>
+            <div>
+              <input id="quantity" type="number" formControlName="quantity" />
+              <!-- [class.error]="assetName.touched && assetName.invalid" -->
+            </div>
+          </div>
+
+          <button (click)="removeAsset($index)">- Remove asset</button>
+
+          <!-- <input type="text" [formControlName]="$index" />
           <button type="button" (click)="removeAsset($index)">
             - Remove asset
-          </button>
+          </button> -->
         </div>
       }
     </div>
