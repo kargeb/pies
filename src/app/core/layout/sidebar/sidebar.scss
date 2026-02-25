@@ -20,4 +20,10 @@ li a {
   &.active {
     background-color: brown;
   }
+
+  &.disabled-link {
+    background-color: black;
+    color: bisque;
+    pointer-events: none;
+  }
 }

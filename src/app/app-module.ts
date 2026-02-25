@@ -20,6 +20,7 @@ import {
   loggingInterceptor,
 } from './core/interceptors';
 import { AuthModule } from './features/auth/auth-module';
+import { NotFound } from './core/layout/not-found/not-found';
 
 const coreComponents = [Topbar, Sidebar];
 
@@ -31,6 +32,7 @@ const coreComponents = [Topbar, Sidebar];
     coreComponents,
     Loader,
     AuthModule,
+    NotFound,
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),

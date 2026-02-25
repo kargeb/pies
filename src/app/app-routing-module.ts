@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { Home } from './features/home/home';
 import { Todo } from './features/todo/todo';
 import { Auth } from './features/auth/auth';
+import { authGuard } from './core/guards';
+import { NotFound } from './core/layout/not-found/not-found';
 
 const routes: Routes = [
   {
@@ -12,16 +14,23 @@ const routes: Routes = [
   {
     path: 'home',
     component: Home,
+    canActivate: [authGuard],
   },
   // { path: 'home', component: undefined },
   {
     path: 'users',
     loadChildren: () => import('./features/users').then((m) => m.UsersModule),
+    canActivate: [authGuard],
     // import('./features/users/users-module').then((m) => m.UsersModule),
   },
-  { path: 'todo', component: Todo },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
-  // { path: '**', component: undefined },
+  { path: 'todo', component: Todo, canActivate: [authGuard] },
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+    // canActivate: [authGuard],
+  },
+  { path: '**', component: NotFound },
 ];
 
 @NgModule({

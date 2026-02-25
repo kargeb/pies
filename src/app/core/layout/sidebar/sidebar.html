@@ -1,13 +1,28 @@
 <nav class="wrapper">
   <ul>
     <li>
-      <a routerLink="/home" routerLinkActive="active">Homee</a>
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [class.disabled-link]="!isAuthenticated"
+        >Homee</a
+      >
     </li>
     <li>
-      <a routerLink="/users" routerLinkActive="active">Users</a>
+      <a
+        routerLink="/users"
+        routerLinkActive="active"
+        [class.disabled-link]="!isAuthenticated"
+        >Users</a
+      >
     </li>
     <li>
-      <a routerLink="/todo" routerLinkActive="active">Todo</a>
+      <a
+        routerLink="/todo"
+        routerLinkActive="active"
+        [class.disabled-link]="!isAuthenticated"
+        >Todo</a
+      >
     </li>
   </ul>
 </nav>
